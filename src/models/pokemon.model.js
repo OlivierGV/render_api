@@ -55,7 +55,7 @@ Pokemon.pagePokemon = (type, page) => {
 
 Pokemon.trouverPokemon = (id) => {
     return new Promise((resolve, reject) => {
-
+        console.log(id);
         const requete = `SELECT * FROM public.pokemon WHERE id = $1`;
         const params = [id]
 
