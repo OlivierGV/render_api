@@ -75,6 +75,7 @@ exports.trouverPokemon = (req, res) => {
     // Si c'est un succès
     .then((pokemon) => {
         // S'il n'y a aucun résultat, on retourne un message d'erreur avec le code 404
+        console.log(pokemon);
         if (!pokemon[0]) {
             res.status(404);
             res.send({

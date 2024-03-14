@@ -64,7 +64,8 @@ Pokemon.trouverPokemon = (id) => {
                 console.log('Une erreur est survenue : Pokemon.trouverPokemon');
                 reject(erreur);
             }
-            resolve(resultat);
+            
+            resolve(resultat.rows);
         });
     });
 };
