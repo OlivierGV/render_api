@@ -1,0 +1,500 @@
+{
+    "openapi" : "3.1.0",
+    "info": {
+        "title": "Pikachu uses LIGHTNING BOLT!",
+        "summary": "Un API qui permet de lister les pokémons, trouver des pokémons ou créer des pokémons.",
+        "description": "L'utilisateur peut entrer des types ou des ID précis dans le navigateur pour trouver des pokémons de son choix. De plus, s'il veut ajouter de nouveaux pokémons ou des pokémons imaginaires, il peut le faire directement via le navigateur.",
+        "contact": {
+            "name": "API Support",
+            "url": "https://github.com/OlivierGV",
+            "email": "oliviergvandal@gmail.com"
+        },
+        "version": "1.0.1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:6969/",
+            "description": "Serveur de développement"
+        }
+    ],
+    "paths" : {
+        "/pokemon/api/{id}" : {
+            "get": {
+                "description": "Recherche un Pokémon par son ID et retourne, dans un objet JSON, les valeurs et attributs du Pokémon trouvé.",
+                "summary": "Description d'un Pokémon.",
+                "tags": ["Pokémon"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du Pokémon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès. Les détails du Pokémon ont été récupérés avec succès.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 25
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Pikachu"
+                                        },
+                                        "type": {
+                                            "type": "string",
+                                            "example": "Electric"
+                                        },
+                                        "hp": {
+                                            "type": "integer",
+                                            "example": 35
+                                        },
+                                        "attack": {
+                                            "type": "integer",
+                                            "example": 55
+                                        },
+                                        "defense": {
+                                            "type": "integer",
+                                            "example": 40
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "L'ID du Pokémon est obligatoire et doit être supérieur à 0.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example":"L'id du pokémon est obligatoire et doit être supérieur à 0"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Aucun Pokémon trouvé avec l'ID donné.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example":"Pokémon introuvable avec l'id 09912919"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500":{
+                        "description": "Échec lors de la récupération de données.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example":"Échec lors de la récupération de données."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Modifier les attributs et les propriétés d'un Pokémon, on le cherche par son ID et on modifie ses valeurs.",
+                "summary": "Modifier un Pokémon.",
+                "tags": ["Pokémon"],
+                "parameters": [
+                    {
+                        "name": "ID",
+                        "in": "query",
+                        "description": "ID du Pokémon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "nom",
+                        "in": "query",
+                        "description": "Nom du Pokémon",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type_primaire",
+                        "in": "query",
+                        "description": "Type primaire du Pokémon",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type_secondaire",
+                        "in": "query",
+                        "description": "Type secondaire du Pokémon",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "pv",
+                        "in": "query",
+                        "description": "Points de vie du Pokémon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "attaque",
+                        "in": "query",
+                        "description": "Points d'attaque du Pokémon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "defense",
+                        "in": "query",
+                        "description": "Défense du Pokémon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Succès.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 25
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Pikachu"
+                                        },
+                                        "type": {
+                                            "type": "string",
+                                            "example": "Electrique"
+                                        },
+                                        "hp": {
+                                            "type": "integer",
+                                            "example": 35
+                                        },
+                                        "attack": {
+                                            "type": "integer",
+                                            "example": 55
+                                        },
+                                        "defense": {
+                                            "type": "integer",
+                                            "example": 40
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Vous devez insérer un type."
+                    },
+                    "404":{
+                        "description": "Aucun Pokémon trouvé avec le type donné."
+                    },
+                    "500":{
+                        "description": "Échec lors de la récupération des données."
+                    }
+                }
+            }
+        },
+        "/pokemon/api/pokemon" : {
+            "post": {
+                "description": "Crée un nouveau Pokémon avec le nom, les types, le nombre de pv, les points d'attaque et la défense données.",
+                "summary": "Création d'un Pokémon.",
+                "tags": ["Pokémon"],
+                "parameters": [
+                    {
+                        "name": "nom",
+                        "in": "path",
+                        "description": "Nom du Pokémon",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type_primaire",
+                        "in": "path",
+                        "description": "Premier type du Pokémon",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type_secondaire",
+                        "in": "path",
+                        "description": "Deuxième type du Pokémon",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "pv",
+                        "in": "path",
+                        "description": "Points de vie du Pokémon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1
+                        }
+                    },
+                    {
+                        "name": "attaque",
+                        "in": "path",
+                        "description": "Points d'attaque du Pokémon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 0
+                        }
+                    },
+                    {
+                        "name": "defense",
+                        "in": "path",
+                        "description": "Points de défense du Pokémon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 0
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès. Les détails du Pokémon ont été récupérés avec succès.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 25
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Pikachu"
+                                        },
+                                        "type": {
+                                            "type": "string",
+                                            "example": "Electrique"
+                                        },
+                                        "hp": {
+                                            "type": "integer",
+                                            "example": 35
+                                        },
+                                        "attack": {
+                                            "type": "integer",
+                                            "example": 55
+                                        },
+                                        "defense": {
+                                            "type": "integer",
+                                            "example": 40
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "L'ID du Pokémon est obligatoire et doit être supérieur à 0.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example":"L'ID du Pokémon est obligatoire et doit être supérieur à 0."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Aucun Pokémon trouvé avec l'ID donné.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example":"Aucun Pokémon trouvé avec l'ID donné."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500":{
+                        "description": "Échec lors de la récupération de données.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example":"Échec lors de la récupération de données."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pokemon/api/liste" : {
+            "get": {
+                "description": "Recherche les Pokémons par leur type et retourne, dans un objet JSON, les valeurs et attributs du Pokémon trouvé. Les éléments sont séparés par 25 sur chaque page, vous pouvez sélectionner la page de votre choix.",
+                "summary": "Description de plusieurs Pokémons.",
+                "tags": ["Pokémon"],
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Numéro de page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Élément du Pokémon (fire, water, grass, poison..)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Succès.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "pokemons": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schema/pokemon"
+                                            }
+                                        },
+                                        "type": {
+                                            "type": "string",
+                                            "example": "grass"
+                                        },
+                                        "nbPokemon": {
+                                            "type": "integer",
+                                            "example": 124
+
+                                        },
+                                        "page": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "nbPage": {
+                                            "type": "integer",
+                                            "example": 5
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Vous devez insérer un type."
+                    },
+                    "404":{
+                        "description": "Aucun Pokémon trouvé avec le type donné."
+                    },
+                    "500":{
+                        "description": "Échec lors de la récupération des données."
+                    }
+                }
+            }
+        }
+    },
+    "components" : {
+        "schema": {
+            "pokemon":{
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "nom": {
+                        "type": "string"
+                    },
+                    "type_primaire": {
+                        "type": "string"
+                    },
+                    "type_secondaire": {
+                        "type": "string"
+                    },
+                    "pv": {
+                        "type": "integer"
+                    },
+                    "attaque": {
+                        "type": "integer"
+                    },
+                    "defense": {
+                        "type": "integer"
+                    }
+                }
+            }
+        }
+    }
+}
